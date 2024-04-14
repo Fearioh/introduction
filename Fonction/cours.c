@@ -5,65 +5,60 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: adelat <adelat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/14 14:35:14 by adelat            #+#    #+#             */
-/*   Updated: 2024/04/14 15:40:20 by adelat           ###   ########.fr       */
+/*   Created: 2024/04/14 17:29:14 by adelat            #+#    #+#             */
+/*   Updated: 2024/04/14 21:19:01 by adelat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
-
-/*
-*
-
-- Creer un menu pour mcdonald, il contiendra 4 choix de menus suivi du prix.
-- Le programme doit demander a l'utilisateur combien il souhaite de menu
-- Une fois que le nombre de menu a ete comptabilise, le programme doit ecrire un recap de commande
-qui contiendra toutes ces infos:
-
-. Ce que le client a choisis comme menu ?
-. En quelle quantitee ?
-. Le prix de chaque lot de menu par nom de menu
-. le prix total
-
-Exemple:
-
-Vous avez choisis: 3 menu mcfirst (16 euros), 2 menu bigmac (11) pour un total de : (27 euros)
-
-- A la fin du recap, le programme doit demander si on souhaite recommander autre chose
-
-*/
-
-#include <stdio.h>
-
-int ft_prix(int menu, int nombre)
+int ft_affichage(int tacos, int poke, int pizza, int burger)
 {
-    int prix = 0;
+    int finish = 0;
 
-    if (menu == 1)
+    printf("Vous avez pris ");
+    if (tacos > 0)
     {
-        prix = 5 * nombre;
+        printf("%d Tacos (%d euros), ", tacos, tacos*5);
     }
-    else if (prix == 2)
+    if (poke > 0)
     {
-        prix = 8 * nombre;
+        printf("%d poke (%d euros), ", poke, poke*8);
     }
-    else if (prix == 3)
+    if (pizza > 0)
     {
-        prix = 12 * nombre;
+        printf("%d Pizza (%d euros), ", pizza, pizza*12);
     }
-    else
+    if (burger > 0)
     {
-        prix = 9 * nombre;
+        printf("%d Burger (%d euros), ", burger, burger*9);
     }
-    return prix;
+    printf("pour un total de %d euros.\n", (tacos*5)+(poke*8)+(pizza*12)+(burger*9));
+    printf("Souhaitez-vous prendre autre chose ?\n1. Oui\n2. Non\n");
+    scanf("%d", &finish);
+    return finish;
 }
 
-int ft_nombre(void)
+int ft_nombre(int menu)
 {
     int nombre = 0;
 
-    printf("Combien de menu souhaitez-vous ?\n");
+    if (menu == 1)
+    {
+        printf("Combien de Tacos souhaitez-vous ?\n");
+    }
+    else if(menu == 2)
+    {
+        printf("Combien de Poke souhaitez-vous ?\n");
+    }
+    else if(menu == 3)
+    {
+        printf("Combien de Pizza souhaitez-vous ?\n");
+    }
+    else if(menu == 4)
+    {
+    printf("Combien de Burger souhaitez-vous ?\n");
+    }
     scanf("%d", &nombre);
     return nombre;
 }
@@ -72,55 +67,81 @@ int ft_menu(void)
 {
     int menu = 0;
     
-    printf("Quel menu souhaitez vous ?\n1. Tacos (5 euros)\n2. Poke (8 euros)\n3. Pizza (12 euros)\n4. Tah le 280 en maxi best of (9 euros)\n");
+    printf("Quel menu souhaitez vous ?\n1. Tacos (5 euros)\n2. Poke (8 euros)\n3. Pizza (12 euros)\n4. Burger (9 euros)\n");
     scanf("%d", &menu);
     return menu;
 }
 
-int ft_oui_non(void)
+int ft_continue(int first, int tacos, int poke, int pizza, int burger)
 {
     int reponse = 0;
-    
-    printf("1. Oui\n2. Non\n");
-    scanf("%d", &reponse);
-    return reponse;
-}
 
-void ft_bonjour_continue(void)
-{
-    int y = 1;
-    int x = 0;
-    int menu = 0;
-    int nombre = 0;
-    int prix = 0;
-    
-    while (y == 1)
+    if (first == 0)
     {
-        if (x == 1)
+        printf("Bienvenue chez McDonald, que souhaitez-vous commander ?\n");
+        return 1;
+    }
+    else if (first == 1)
+    {
+        reponse = ft_affichage(tacos, poke, pizza,burger);
+        if (reponse == 1)
         {
-            printf("Il vous faudra autre chose ?\n");
-            y = ft_oui_non();
-            if (y == 1)
-            {
-                menu = ft_menu();
-                nombre = ft_nombre();
-                prix = prix + ft_prix(menu, nombre);
-            }
-            //printf("Y --> %d\n", y);
+            return reponse;
         }
         else
         {
-            printf("Bienvenue chez McDonald. ");
-            menu = ft_menu();
-            nombre = ft_nombre();
-            prix = prix + ft_prix(menu, nombre);
-            x += 1;
+            return reponse;
         }
-        printf("Cela vous fera un total de %d euros\n", prix);
+    }
+    return reponse;
+}
+
+void ft_total(void)
+{
+    int tacos = 0;
+    int poke = 0;
+    int pizza = 0;
+    int burger = 0;
+    int first = 0;
+    int boucle = 1;
+    int menu = 0;
+    int nombre = 0;
+    int finish = 0;
+    
+    while (finish == 0)
+    {
+        while (boucle == 1)
+        {
+            boucle = ft_continue(first, tacos, poke, pizza, burger);
+            if (boucle == 1)
+            {
+                menu = ft_menu();
+                nombre = ft_nombre(menu);
+                if (menu == 1)
+                {
+                    tacos = tacos + nombre;
+                }
+                if (menu == 2)
+                {
+                    poke = poke + nombre;
+                }
+                if (menu == 3)
+                {
+                    pizza = pizza + nombre;
+                }
+                if (menu == 4)
+                {
+                    burger = burger + nombre;
+                }
+                first = 1;
+            }
+        }
+        finish = 1;
     }
 }
 
 int main(void)
 {
-    ft_bonjour_continue();
+    ft_total();
+    return 0;
 }
