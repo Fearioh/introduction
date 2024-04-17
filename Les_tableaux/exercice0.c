@@ -6,7 +6,7 @@
 /*   By: adelat <adelat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:41:05 by adelat            #+#    #+#             */
-/*   Updated: 2024/04/17 13:47:21 by adelat           ###   ########.fr       */
+/*   Updated: 2024/04/17 13:49:55 by adelat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char *ft_checksize(char *str1, char *str2)
     int check2 = 0;
 
     while (str1[check1])
-            check1++;
+        check1++;
     while (str2[check2])
         check2++;
     if (check1 <= check2)
