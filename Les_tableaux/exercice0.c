@@ -6,7 +6,7 @@
 /*   By: adelat <adelat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:41:05 by adelat            #+#    #+#             */
-/*   Updated: 2024/04/17 13:03:09 by adelat           ###   ########.fr       */
+/*   Updated: 2024/04/17 13:47:21 by adelat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,7 @@ char *ft_checksize(char *str1, char *str2)
 }
 
 char *ft_strcpy(char *str1, char *str2)
-{
-    int check1 = 0;
-    int check2 = 0;
-    
+{   
     if ((str1[0] != '\0') && (str2[0] != '\0'))
         str2 = ft_checksize(str1, str2);
     else
@@ -73,7 +70,7 @@ char *ft_strcpy(char *str1, char *str2)
 int main(void)
 {
     
-    char *str1 = strdup("Bonjour");
+    char *str1 = strdup("Ceci est un test");
     char *str2 = strdup("Bonjour");
 
     char *str3 = ft_strcpy(str1, str2);
