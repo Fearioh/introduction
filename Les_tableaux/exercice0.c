@@ -6,7 +6,7 @@
 /*   By: adelat <adelat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 11:41:05 by adelat            #+#    #+#             */
-/*   Updated: 2024/04/17 13:49:55 by adelat           ###   ########.fr       */
+/*   Updated: 2024/04/17 14:12:56 by adelat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,27 +53,29 @@ char *ft_checksize(char *str1, char *str2)
     if (check1 <= check2)
         str2 = ft_str1tostr2(str1, str2, check1);
     else
-        str2 = "NULL";
+        str2 = NULL;
     return str2;
         
 }
 
+
+
 char *ft_strcpy(char *str1, char *str2)
 {   
-    if ((str1[0] != '\0') && (str2[0] != '\0'))
+    if (str1 && str2 && (str1[0] != '\0') && (str2[0] != '\0'))
         str2 = ft_checksize(str1, str2);
     else
-        str2 = "NULL";
+        str2 = NULL;
     return str2;
 }
 
 int main(void)
 {
     
-    char *str1 = strdup("Ceci est un test");
+    char *str1 = strdup("");
     char *str2 = strdup("Bonjour");
 
-    char *str3 = ft_strcpy(str1, str2);
+    char *str3 = ft_strcpy(str1, NULL);
     printf("LA PHRASE COPIE --> %s\n", str3);
 
     free(str1);
