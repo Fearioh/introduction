@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   pendu.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adelat <adelat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 21:29:05 by adelat            #+#    #+#             */
-/*   Updated: 2024/04/19 23:50:31 by adelat           ###   ########.fr       */
+/*   Updated: 2024/04/20 00:01:22 by adelat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,12 +137,12 @@ void ft_pendu(char *word)
     int size = 0;
     int life = 10;
 
+    printf("Bienvenu dans cette partie de Pendu !\n");
     size = ft_size(word);
     life = ft_game(word, size, life);
 }
 
 int main(void)
 {
-    printf("Bienvenu dans cette partie de Pendu !\n");
     ft_pendu("DEVINER");
 }
