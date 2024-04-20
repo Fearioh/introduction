@@ -6,7 +6,7 @@
 /*   By: adelat <adelat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 21:29:05 by adelat            #+#    #+#             */
-/*   Updated: 2024/04/20 00:01:22 by adelat           ###   ########.fr       */
+/*   Updated: 2024/04/20 22:14:24 by adelat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,21 @@ int ft_checklife(char guess, char *word, int life)
     return life;
 }
 
+char ft_updateguess(char guess, char *check)
+{
+    int index = 0;
+    
+    printf("Lettres utilisées : ");
+    while(check[index] != '\0' && check[index] != ' ')
+    {
+        printf("%c ", check[index]);
+        index++;
+    }
+    check[index] = guess;
+    printf("%c\n", check[index]);
+    return guess;
+}
+
 char ft_guess()
 {
     char guess;
@@ -98,11 +113,34 @@ char ft_printfirst(char c)
     return c;
 }
 
+int ft_param(int life, int win, char *str, char *word, int size)
+{
+    char guess;
+    int i = 0;
+    char strguess[27];
+    
+    while (strguess[i])
+    {
+        strguess[i] = ' ';
+        i++;
+    }
+    i = 0;
+    while (life > 0 && win != 1)
+    {
+        printf("\n");
+        guess = ft_guess();
+        strguess[i] = ft_updateguess(guess, strguess);
+        life = ft_checklife(guess, word, life);
+        win = ft_update(word, str, size, guess);
+        i++;
+    }
+    return win;
+}
+
 int ft_game(char *word, int size, int life)
 {
     char str[size+1];
     int i = 0;
-    char guess;
     int win = 0;
     
     while (i < size)
@@ -111,13 +149,7 @@ int ft_game(char *word, int size, int life)
         i++;
     }
     i = 0;
-    while (life > 0 && win != 1)
-    {
-        printf("\n");
-        guess = ft_guess();
-        life = ft_checklife(guess, word, life);
-        win = ft_update(word, str, size, guess);
-    }
+    win = ft_param(life, win, str, word, size);
     if (win == 1)
         printf("\nBravo ! Vous avez trouvé !\n\n");
     return life;
@@ -144,5 +176,5 @@ void ft_pendu(char *word)
 
 int main(void)
 {
-    ft_pendu("DEVINER");
+    ft_pendu("SUPER");
 }
