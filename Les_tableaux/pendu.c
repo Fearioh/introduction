@@ -6,7 +6,7 @@
 /*   By: adelat <adelat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 21:29:05 by adelat            #+#    #+#             */
-/*   Updated: 2024/04/20 22:14:24 by adelat           ###   ########.fr       */
+/*   Updated: 2024/04/21 10:08:57 by adelat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int ft_update(char *word, char *str, int size, char guess)
     return win;
 }
 
-int ft_checklife(char guess, char *word, int life)
+int ft_checklife(char guess, char *word, int life, char strguess)
 {
     int i = 0;
     int check = 0;
@@ -60,7 +60,7 @@ int ft_checklife(char guess, char *word, int life)
             check = 1;
         i++;
     }
-    if (check == 0)
+    if (check == 0 && strguess != ' ')
     {
         life--;
     }
@@ -74,16 +74,24 @@ int ft_checklife(char guess, char *word, int life)
 char ft_updateguess(char guess, char *check)
 {
     int index = 0;
+    int same = 0;
     
     printf("Lettres utilisées : ");
     while(check[index] != '\0' && check[index] != ' ')
     {
+        if (check[index] == guess)
+            same++;
         printf("%c ", check[index]);
         index++;
     }
-    check[index] = guess;
-    printf("%c\n", check[index]);
-    return guess;
+    if (same == 0)
+    {
+        check[index] = guess;
+        printf("%c\n\n", check[index]);
+        return guess;
+    }
+    printf("\n\n");
+    return ' ';
 }
 
 char ft_guess()
@@ -130,7 +138,7 @@ int ft_param(int life, int win, char *str, char *word, int size)
         printf("\n");
         guess = ft_guess();
         strguess[i] = ft_updateguess(guess, strguess);
-        life = ft_checklife(guess, word, life);
+        life = ft_checklife(guess, word, life, strguess[i]);
         win = ft_update(word, str, size, guess);
         i++;
     }
