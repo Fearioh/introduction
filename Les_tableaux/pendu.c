@@ -6,7 +6,7 @@
 /*   By: adelat <adelat@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/19 21:29:05 by adelat            #+#    #+#             */
-/*   Updated: 2024/04/21 10:08:57 by adelat           ###   ########.fr       */
+/*   Updated: 2024/04/23 22:12:01 by adelat           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int ft_param(int life, int win, char *str, char *word, int size)
 {
     char guess;
     int i = 0;
-    char strguess[27];
+    char strguess[1000000];
     
     while (strguess[i])
     {
@@ -172,17 +172,42 @@ int ft_size(char *word)
     return i;
 }
 
-void ft_pendu(char *word)
+char    ft_maj(char *word, int i)
+{
+    if(word[i] >= 'a' && word[i] <= 'z')
+        return word[i] - 32;
+    else
+        return word[i];
+}
+
+int ft_pendu(char *word)
 {
     int size = 0;
     int life = 10;
+    char strguess[10000];
+    int i = 0;
 
+    if(word)
+    {
+        while (word[i] != '\0')
+        {
+            strguess[i] = ft_maj(word, i);
+            i++;
+        }
+        strguess[i] = ft_maj(word, i);
+    }
+    else
+    {
+        printf("Pas de mot à deviner !\n");
+        return 0;
+    }
     printf("Bienvenu dans cette partie de Pendu !\n");
-    size = ft_size(word);
-    life = ft_game(word, size, life);
+    size = ft_size(strguess);
+    life = ft_game(strguess, size, life);
+    return 1;
 }
 
-int main(void)
+int main()
 {
-    ft_pendu("SUPER");
+    ft_pendu("pendu");
 }
